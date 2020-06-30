@@ -81,8 +81,44 @@ module.exports = (api, options, rootOptions) => {
     })
 
     const template = options.repo || options.template
-
     const base = 'src'
+
+    // 下载公共组件到default-ts文件中
+    const ora = require('ora')
+    const home = require('user-home')
+    const download = require('download-git-repo')
+
+    const spinner = ora('通用组件下载中...')
+    spinner.start()
+
+    const tmp = path.join(home, '.uni-app/templates', template.replace(/[/:]/g, '-'), 'src')
+
+    if (fs.existsSync(tmp)) {
+      try {
+        require('rimraf').sync(tmp)
+      } catch (e) {
+        console.error(e)
+      }
+    }
+
+    let cpm = 'direct:http://chenliang:Cl54325000111@github.app.hd123.cn:10080/applib/uniapp-components.git'
+    // download('direct:http://chenliang:Cl54325000111@github.app.hd123.cn:10080/applib/uniapp-components.git', 'test/tmp', { clone: true }, function (err) {
+    //   console.log(err ? 'Error' : 'Success')
+    // })
+
+    await new Promise((resolve, reject) => {
+      download(cpm, './template',{ clone: true }, err => {
+        spinner.stop()
+        if (err) {
+          return reject(err)
+        }
+        resolve()
+      })
+    })
+
+    await generate(tmp, files, base)
+
+
     await generate(path.resolve(__dirname, './template/common'), files)
     await generate(path.resolve(__dirname, './template/default-ts'), files, base, rootOptions)
 

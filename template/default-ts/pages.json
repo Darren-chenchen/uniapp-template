@@ -6,13 +6,6 @@
       "style": {
         "navigationBarTitleText": ""
       }
-    },
-    {
-      "path": "pages/regiest/regiest",
-      "style": {
-        "navigationBarTitleText": "",
-        "navigationStyle": "custom"
-      }
     }
   ],
   "globalStyle": {
