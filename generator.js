@@ -83,39 +83,41 @@ module.exports = (api, options, rootOptions) => {
 
     const base = 'src'
     await generate(path.resolve(__dirname, './template/common'), files)
-    if (template === 'default') {
-      await generate(path.resolve(__dirname, './template/default'), files, base, rootOptions)
-    } else if (template === 'default-ts') {
-      await generate(path.resolve(__dirname, './template/default-ts'), files, base, rootOptions)
-    } else {
-      const ora = require('ora')
-      const home = require('user-home')
-      const download = require('download-git-repo')
+    await generate(path.resolve(__dirname, './template/default-ts'), files, base, rootOptions)
 
-      const spinner = ora('模板下载中...')
-      spinner.start()
+    // if (template === 'default') {
+    //   await generate(path.resolve(__dirname, './template/default'), files, base, rootOptions)
+    // } else if (template === 'default-ts') {
+    //   await generate(path.resolve(__dirname, './template/default-ts'), files, base, rootOptions)
+    // } else {
+    //   const ora = require('ora')
+    //   const home = require('user-home')
+    //   const download = require('download-git-repo')
 
-      const tmp = path.join(home, '.uni-app/templates', template.replace(/[/:]/g, '-'), 'src')
+    //   const spinner = ora('模板下载中...')
+    //   spinner.start()
 
-      if (fs.existsSync(tmp)) {
-        try {
-          require('rimraf').sync(tmp)
-        } catch (e) {
-          console.error(e)
-        }
-      }
+    //   const tmp = path.join(home, '.uni-app/templates', template.replace(/[/:]/g, '-'), 'src')
 
-      await new Promise((resolve, reject) => {
-        download(template, tmp, err => {
-          spinner.stop()
-          if (err) {
-            return reject(err)
-          }
-          resolve()
-        })
-      })
+    //   if (fs.existsSync(tmp)) {
+    //     try {
+    //       require('rimraf').sync(tmp)
+    //     } catch (e) {
+    //       console.error(e)
+    //     }
+    //   }
 
-      await generate(tmp, files, base)
-    }
+    //   await new Promise((resolve, reject) => {
+    //     download(template, tmp, err => {
+    //       spinner.stop()
+    //       if (err) {
+    //         return reject(err)
+    //       }
+    //       resolve()
+    //     })
+    //   })
+
+    //   await generate(tmp, files, base)
+    // }
   })
 }
