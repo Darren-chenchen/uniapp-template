@@ -1,7 +1,7 @@
 {
     "name": "uniapp-template",
     "version": "0.0.1",
-    "description": "uni-app preset for vue-cli",
+    "description": "",
     "main": "index.js",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1"
