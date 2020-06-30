@@ -54,7 +54,8 @@ module.exports = (api, options, rootOptions) => {
         'eslint-plugin-vue': '^5.2.3',
         '@typescript-eslint/parser': '^1.10.2',
         '@vue/eslint-config-standard': '^4.0.0',
-        '@vue/cli-plugin-eslint': '^4.0.4'
+        '@vue/cli-plugin-eslint': '^4.0.4',
+        '@typescript-eslint/eslint-plugin': '3.0.0'
       }
     }
   })

@@ -3,24 +3,23 @@ import Vue from 'vue'
 export default Vue.extend({
   mpType: 'app',
   onLaunch() {
-    var sysdata = uni.getSystemInfoSync()
+    var sysdata: any = uni.getSystemInfoSync()
     // #ifndef MP
-    Vue.prototype.StatusBar = sysdata.statusBarHeight
+    Vue.prototype.statusBarHeight = sysdata.statusBarHeight
     if (sysdata.platform === 'android') {
-      Vue.prototype.CustomBar = (sysdata.statusBarHeight || 0) + 50
+      Vue.prototype.navBarHeight = (sysdata.statusBarHeight || 0) + 50
     } else {
-      Vue.prototype.CustomBar = (sysdata.statusBarHeight || 0) + 45
+      Vue.prototype.navBarHeight = (sysdata.statusBarHeight || 0) + 45
     }
     // #endif
     // #ifdef MP-WEIXIN
-    Vue.prototype.StatusBar = sysdata.statusBarHeight
+    Vue.prototype.statusBarHeight = sysdata.statusBarHeight
     let custom = wx.getMenuButtonBoundingClientRect()
-    Vue.prototype.Custom = custom
-    Vue.prototype.CustomBar = custom.bottom + custom.top - sysdata.statusBarHeight
+    Vue.prototype.navBarHeight = custom.bottom + custom.top - sysdata.statusBarHeight
     // #endif
     // #ifdef MP-ALIPAY
-    Vue.prototype.StatusBar = sysdata.statusBarHeight
-    Vue.prototype.CustomBar = sysdata.statusBarHeight + sysdata.titleBarHeight
+    Vue.prototype.statusBarHeight = sysdata.statusBarHeight
+    Vue.prototype.navBarHeight = sysdata.statusBarHeight + sysdata.titleBarHeight
     // #endif
 
     /// 自定义Tabbar的高度，处理iphonex以外的，统一设置成高度50
@@ -36,9 +35,9 @@ export default Vue.extend({
       modelmes.indexOf('iPhoneXR') >= 0 ||
       modelmes.indexOf('iPhoneX') >= 0
     ) {
-      Vue.prototype.safeAreaBottom = 84
+      Vue.prototype.safeAreaBottom = 34
     } else {
-      Vue.prototype.safeAreaBottom = 50
+      Vue.prototype.safeAreaBottom = 0
     }
   },
   onUnload() {},
