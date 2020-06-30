@@ -36,13 +36,26 @@ module.exports = (api, options, rootOptions) => {
     return {
       dependencies: {
         'regenerator-runtime': '^0.12.1',// 锁定版本，避免高版本在小程序中出错
-        '@dcloudio/uni-helper-json': '*'
+        '@dcloudio/uni-helper-json': '*',
+        'eslint-loader': '^4.0.2',
+        'node-sass': '^4.11.0',
+        'sass-loader': '^7.1.0'
       },
       devDependencies: {
         'postcss-comment': '^2.0.0',
-        '@dcloudio/types': '0.4.4',
+        '@dcloudio/types': '*',
         'miniprogram-api-typings': '*',
-        'mini-types': '*'
+        'mini-types': '*',
+        'prettier': '^1.19.1',
+        'eslint': '^5.16.0',
+        'eslint-plugin-html': '^5.0.0',
+        'eslint-plugin-node': '^10.0.0',
+        'eslint-plugin-typescript': '^0.14.0',
+        'eslint-plugin-vue': '^5.2.3',
+        '@typescript-eslint/eslint-plugin': '^3.0.0',
+        '@typescript-eslint/parser': '^1.10.2',
+        '@vue/eslint-config-standard': '^4.0.0',
+        '@vue/cli-plugin-eslint': '^4.0.4'
       }
     }
   })
@@ -60,15 +73,6 @@ module.exports = (api, options, rootOptions) => {
         }
       }
     })
-  } else if (options.template === 'dcloudio/uni-template-news') {
-    api.extendPackage(pkg => {
-      return {
-        devDependencies: {
-          'node-sass': '^4.11.0',
-          'sass-loader': '^7.1.0'
-        }
-      }
-    })
   }
 
   api.render(async function (files) {
@@ -83,7 +87,6 @@ module.exports = (api, options, rootOptions) => {
     if (template === 'default') {
       await generate(path.resolve(__dirname, './template/default'), files, base, rootOptions)
     } else if (template === 'default-ts') {
-      await generate(path.resolve(__dirname, './template/common-ts'), files)
       await generate(path.resolve(__dirname, './template/default-ts'), files, base, rootOptions)
     } else {
       const ora = require('ora')
