@@ -1,5 +1,5 @@
 <template>
-  <view>{{ test }}</view>
+  <view @click="_gotoSub">{{ test }}</view>
 </template>
 
 <script lang="ts">
@@ -15,7 +15,7 @@ export default Vue.extend({
   props: {
     dataArr: {
       type: Array,
-      default: function() {
+      default: function () {
         return []
       }
     }
@@ -31,7 +31,9 @@ export default Vue.extend({
     }
   },
   onLoad() {},
-  methods: {}
+  methods: {
+    _gotoSub() {}
+  }
 })
 </script>
 
