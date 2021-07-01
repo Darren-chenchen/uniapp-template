@@ -34,6 +34,20 @@ async function generate (dir, files, base = '', rootOptions = {}) {
 module.exports = (api, options, rootOptions) => {
   api.extendPackage(pkg => {
     return {
+      scripts: {
+        "example": "node ./src/router_example/build.js && cross-env NODE_ENV=development UNI_PLATFORM=h5 vue-cli-service uni-serve",
+        "example:mp-weixin": "node ./src/router_example/build.js && cross-env NODE_ENV=development UNI_PLATFORM=mp-weixin vue-cli-service uni-build --watch",
+        "dev:h5": "router_config.sh && cross-env NODE_ENV=development UNI_PLATFORM=h5 vue-cli-service uni-serve",
+        "dev:app-plus": "router_config.sh && cross-env NODE_ENV=development UNI_PLATFORM=app-plus vue-cli-service uni-build --watch",
+        "dev:custom": "router_config.sh && cross-env NODE_ENV=development uniapp-cli custom",
+        "dev:mp-alipay": "router_config.sh && cross-env NODE_ENV=development UNI_PLATFORM=mp-alipay vue-cli-service uni-build --watch",
+        "dev:mp-weixin": "router_config.sh && cross-env NODE_ENV=development UNI_PLATFORM=mp-weixin vue-cli-service uni-build --watch",
+        "build:app-plus": "router_config.sh && cross-env NODE_ENV=production UNI_PLATFORM=app-plus vue-cli-service uni-build",
+        "build:custom": "router_config.sh && cross-env NODE_ENV=production uniapp-cli custom",
+        "build:h5": "router_config.sh && cross-env NODE_ENV=production UNI_PLATFORM=h5 vue-cli-service uni-build",
+        "build:mp-alipay": "router_config.sh && cross-env NODE_ENV=production UNI_PLATFORM=mp-alipay vue-cli-service uni-build",
+        "build:mp-weixin": "router_config.sh && cross-env NODE_ENV=production UNI_PLATFORM=mp-weixin vue-cli-service uni-build"
+      },
       dependencies: {
         'regenerator-runtime': '^0.12.1',// 锁定版本，避免高版本在小程序中出错
         '@dcloudio/uni-helper-json': '*',
